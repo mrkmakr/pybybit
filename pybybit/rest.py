@@ -13,6 +13,7 @@ class RESTAPI:
         self.linear = Linear(self._request)
 
     def _prepare(self, method: str, url: str, query: dict, private: bool) -> dict:
+        query["recv_window"] = 50000
         for k in list(query):
             if query[k] is None:
                 del query[k]
