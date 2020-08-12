@@ -14,6 +14,7 @@ class RESTAPI:
 
     def _prepare(self, method: str, url: str, query: dict, private: bool) -> dict:
         query["recv_window"] = 50000
+        print(query)
         for k in list(query):
             if query[k] is None:
                 del query[k]
@@ -34,6 +35,7 @@ class RESTAPI:
 
     def _request(self, method: str, path: str, query: dict, private: bool) -> requests.Response:
         req_args = self._prepare(method, self._url + path, query, private)
+        print(req_args)
         resp = self._session.request(**req_args)
         for cb in self._callbacks:
             cb(resp, self._session)
